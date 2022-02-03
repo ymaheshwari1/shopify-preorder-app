@@ -9,7 +9,7 @@
 
     function getAddToCartLabel () {
         if (location.pathname.includes('products')) {
-            addToCartLabel = jQueryPreOrder("#hc_preorderButton, .hc_preorderButton").html();
+            addToCartLabel = jQueryPreOrder("#hc_preorderButton, .hc_preorderButton").text();
         }
     }
 
@@ -38,18 +38,17 @@
 
     if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn['jquery']) < 1.7)) {
         loadScript('//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', function(){
-          jQueryPreOrder = jQuery.noConflict(true);
-          jQueryPreOrder(document).ready(function() {
-              initialisePreOrder();
-              getAddToCartLabel();
-          });
-
+            jQueryPreOrder = jQuery.noConflict(true);
+            jQueryPreOrder(document).ready(function() {
+                getAddToCartLabel();
+                initialisePreOrder();
+            });
         });
     } else {
         jQueryPreOrder = jQuery;
         jQueryPreOrder(document).ready(function() {
-            initialisePreOrder();
             getAddToCartLabel();
+            initialisePreOrder();
         });
     }
 
@@ -148,7 +147,7 @@
                         const label = productType === 'Pre-Order' ? 'Pre Order' : productType === 'Back-Order' && 'Back Order'
 
                         // will add Pre Order / Back Order label to the button
-                        preorderButton.html(`<span>${label}</span>`).css("text-transform", "upper-case");
+                        preorderButton.html(`<span>${label}</span>`).css("text-transform", "uppercase");
 
                         // will handle the click event on the pre order button
                         preorderButton.on("click", {cartForm, label, date}, addToCartFromProductCard);
