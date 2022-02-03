@@ -77,7 +77,7 @@
             let span = jQueryPreOrder("#hc_preordershipsfrom span");
 
             hcpreorderShipsFrom.css('visibility', 'hidden');
-            preorderButton.html(addToCartLabel);
+            preorderButton.html(`<span>${addToCartLabel}</span>`).css("text-transform", "uppercase");
 
             // removing the click event with handler addToCart
             preorderButton.off('click', addToCart);
@@ -106,7 +106,7 @@
             buttonLabel = productType === 'Pre-Order' ? 'Pre Order' : productType === 'Back-Order' && 'Back Order'
 
             // will add Pre Order to the button
-            preorderButton.html(buttonLabel);
+            preorderButton.html(`<span>${buttonLabel}</span>`).css("text-transform", "uppercase");
 
             // will find for a tag with id hc_preordershipsfrom and if found then add the date to the tag
             if(hcpreorderShipsFrom.length > 0) {
@@ -139,7 +139,7 @@
                     if (continueSelling && continueSelling == 'true') {
 
                         // finding a button with type submit as the button will be on the same level as the input field so using siblings
-                        const preorderButton = variantTagInput.siblings("#hc_preorderButton");
+                        const preorderButton = variantTagInput.siblings(".hc_preorderButton");
                         const cartForm = variantTagInput.parent();
                         const date = productType === 'Pre-Order' ? preOrderDate : productType === 'Back-Order' && backOrderDate;
 
@@ -148,7 +148,7 @@
                         const label = productType === 'Pre-Order' ? 'Pre Order' : productType === 'Back-Order' && 'Back Order'
 
                         // will add Pre Order / Back Order label to the button
-                        preorderButton.val(label);
+                        preorderButton.html(`<span>${label}</span>`).css("text-transform", "upper-case");
 
                         // will handle the click event on the pre order button
                         preorderButton.on("click", {cartForm, label, date}, addToCartFromProductCard);
@@ -165,7 +165,7 @@
         event.stopImmediatePropagation();
 
         let orderProperty = jQueryPreOrder(`<input id="pre-order-item" name="properties[Note]" value="${event.data.label}" type="hidden"/>`)
-        let estimatedDeliveryDateProperty = jQueryPreOrder(`<input id="pre-order-item" name="properties[PROMISE_DATE]" value="${event.data.date}" type="hidden"/>`)
+        let estimatedDeliveryDateProperty = jQueryPreOrder(`<input id="pre-order-item" name="properties[Expected Ship Date]" value="${event.data.date}" type="hidden"/>`)
 
         event.data.cartForm.append(orderProperty)
         // adding promise date to cart only if it's present
@@ -197,7 +197,7 @@
         event.stopImmediatePropagation();
 
         let orderProperty = jQueryPreOrder(`<input id="pre-order-item" name="properties[Note]" value="${buttonLabel}" type="hidden"/>`)
-        let estimatedDeliveryDateProperty = jQueryPreOrder(`<input id="pre-order-item" name="properties[PROMISE_DATE]" value="${localDeliveryDate}" type="hidden"/>`)
+        let estimatedDeliveryDateProperty = jQueryPreOrder(`<input id="pre-order-item" name="properties[Expected Ship Date]" value="${localDeliveryDate}" type="hidden"/>`)
 
         addToCartForm.append(orderProperty)
         // adding promise date to cart only if it's present
