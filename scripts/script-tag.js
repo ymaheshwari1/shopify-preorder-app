@@ -250,4 +250,12 @@
             initialisePreOrder();
         }
     }).observe(document, {subtree: true, childList: true});
+
+    // added a mutation observer to check the DOM changes for tt-product-listing class and run the script again
+    if (jQueryPreOrder('.tt-product-listing')[0]){
+        new MutationObserver(() => {
+            initialisePreOrder();
+        }).observe(jQueryPreOrder('.tt-product-listing')[0], {subtree: false, childList: true});
+    }
+
 })();
