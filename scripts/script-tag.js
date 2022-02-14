@@ -120,7 +120,7 @@
                 if (localDeliveryDate && localDeliveryDate !== 'NULL' && localDeliveryDate !== '_NA_') {
                     span.html(`${localDeliveryDate}`)
                     hcpreorderShipsFrom.css('visibility', 'visible');
-                } else if (productType === 'Back-Order' && jQueryPreOrder(".hc_backorderString")){
+                } else if (productType === 'Back-Order' && jQueryPreOrder(".hc_backorderString").length){
                     hcpreorderShipsFrom.css('visibility', 'visible');
                     localDeliveryDate = jQueryPreOrder(".hc_backorderString").text();
                     span.html(`${localDeliveryDate}`)
@@ -166,7 +166,7 @@
                         // will add Pre Order / Back Order label to the button
                         preorderButton.html(`<span>${label}</span>`).css("text-transform", "uppercase");
 
-                        if ((!date || date == '_NA_' || date == 'NULL') && productType === 'Back-Order' && jQueryPreOrder(".hc_backorderString")) {
+                        if ((!date || date == '_NA_' || date == 'NULL') && productType === 'Back-Order' && jQueryPreOrder(".hc_backorderString").length) {
                             date = jQueryPreOrder(".hc_backorderString").text();
                         }
 
