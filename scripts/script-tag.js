@@ -90,13 +90,13 @@
                 return product.variants.find((variant) => variant.id == variantId).available
             }).catch(err => err);
 
-            if (jQueryPreOrder("input[id='hc_inventory']").val() > 0) checkItemAvailablity = false;
+            if (jQueryPreOrder("input[class='hc_inventory']").val() > 0) checkItemAvailablity = false;
 
             // if the product does not contains specific tag and continue selling is not enabled then not executing the script
             if (!checkItemAvailablity) return ;
 
-            const backOrderDate = jQueryPreOrder("input[id='hc_backOrderDate']").val();
-            const preOrderDate = jQueryPreOrder("input[id='hc_preOrderDate']").val();
+            const backOrderDate = jQueryPreOrder("input[class='hc_backOrderDate']").val();
+            const preOrderDate = jQueryPreOrder("input[class='hc_preOrderDate']").val();
 
             localDeliveryDate = productType === 'Pre-Order' ? preOrderDate : productType === 'Back-Order' && backOrderDate;
 
@@ -134,17 +134,17 @@
         } else {
             // this part executes on all the page other than product page
             // finding an input field with name tags and then iterating over the same
-            jQueryPreOrder("input[id='hc_tags']").map(async function (index, element) {
+            jQueryPreOrder("input[class='hc_tags']").map(async function (index, element) {
 
                 const variantTagInput = jQueryPreOrder(element);
 
                 // checking for Pre-Order or Back-Order tag
                 if (variantTagInput.val().includes('Pre-Order') || variantTagInput.val().includes('Back-Order')) {
 
-                    const backOrderDate = variantTagInput.siblings("input[id=hc_backOrderDate]").val()
-                    const preOrderDate = variantTagInput.siblings("input[id=hc_preOrderDate]").val()
-                    const continueSelling = variantTagInput.siblings("input[id=hc_continueSelling]").val()
-                    const variantInventory = variantTagInput.siblings("input[id=hc_inventory]").val()
+                    const backOrderDate = variantTagInput.siblings("input[class=hc_backOrderDate]").val()
+                    const preOrderDate = variantTagInput.siblings("input[class=hc_preOrderDate]").val()
+                    const continueSelling = variantTagInput.siblings("input[class=hc_continueSelling]").val()
+                    const variantInventory = variantTagInput.siblings("input[class=hc_inventory]").val()
 
                     const productType = variantTagInput.val().includes('Pre-Order') ? 'Pre-Order' : variantTagInput.val().includes('Back-Order') && 'Back-Order'
 
